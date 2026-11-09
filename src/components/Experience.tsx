@@ -9,6 +9,13 @@ import { experience } from '../data/experience'
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
 
+const clientLogos: Record<string, string> = {
+  'Cowater International Ghana': '/images/worked-for/cowater.jpeg',
+  'Shalina Healthcare Ghana': '/images/worked-for/shalina.jpeg',
+  'Nova University': '/images/worked-for/nova.jpeg',
+  'Department of Feeder Roads': '/images/worked-for/feeder-roads.jpeg',
+}
+
 export function Experience() {
   return (
     <section id="experience" className="relative py-24 sm:py-32 bg-[#080F1C]">
@@ -77,21 +84,35 @@ export function Experience() {
                       </div>
                     </div>
 
-                    {/* Client Badges if available */}
+                    {/* Client Badges with Logos if available */}
                     {item.clients && item.clients.length > 0 && (
-                      <div className="mb-4 rounded-xl bg-slate-900/80 border border-slate-800 p-3">
-                        <p className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 mb-2">
+                      <div className="mb-5 rounded-xl bg-slate-900/80 border border-slate-800 p-3.5">
+                        <p className="text-[11px] font-mono uppercase tracking-wider text-cyan-400 mb-2.5">
                           Client Organizations Served:
                         </p>
-                        <div className="flex flex-wrap gap-1.5">
-                          {item.clients.map((client) => (
-                            <span
-                              key={client}
-                              className="rounded-md bg-slate-800/90 border border-slate-700/60 px-2.5 py-1 text-xs text-slate-200"
-                            >
-                              {client}
-                            </span>
-                          ))}
+                        <div className="flex flex-wrap gap-2">
+                          {item.clients.map((client) => {
+                            const logo = clientLogos[client]
+                            return (
+                              <span
+                                key={client}
+                                className="inline-flex items-center gap-2 rounded-lg bg-slate-800/90 border border-slate-700/60 px-3 py-1.5 text-xs text-slate-200 shadow-sm"
+                              >
+                                {logo ? (
+                                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-white p-0.5 overflow-hidden">
+                                    <img
+                                      src={logo}
+                                      alt=""
+                                      className="max-h-full max-w-full object-contain"
+                                    />
+                                  </span>
+                                ) : (
+                                  <Building className="h-3.5 w-3.5 text-cyan-400 shrink-0" />
+                                )}
+                                <span>{client}</span>
+                              </span>
+                            )
+                          })}
                         </div>
                       </div>
                     )}

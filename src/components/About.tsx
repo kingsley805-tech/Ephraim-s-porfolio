@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   CheckCircle2,
   FileDown,
@@ -6,12 +8,16 @@ import {
   Users,
   Radio,
   ExternalLink,
+  UserCheck,
+  Server,
 } from 'lucide-react'
 import { profile } from '../data/profile'
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
 
 export function About() {
+  const [activePhoto, setActivePhoto] = useState<'portrait' | 'rack'>('portrait')
+
   return (
     <section id="about" className="relative py-24 sm:py-32 bg-[#080F1C]">
       {/* Subtle top separator */}
@@ -25,27 +31,90 @@ export function About() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
-          {/* Left Column: Visual Card with Real Console Photograph */}
+          {/* Left Column: Visual Card with Profile & Field Photos */}
           <div className="lg:col-span-5">
             <Reveal>
-              <div className="relative rounded-2xl border border-slate-800 bg-[#0e1726] p-4 shadow-xl overflow-hidden group">
+              <div className="relative rounded-2xl border border-slate-800 bg-[#0e1726] p-4 sm:p-5 shadow-xl overflow-hidden group">
                 {/* Glow accent */}
                 <div className="absolute -top-12 -left-12 h-44 w-44 rounded-full bg-cyan-500/15 blur-2xl group-hover:bg-cyan-500/25 transition-all" />
 
-                <div className="relative overflow-hidden rounded-xl aspect-[4/3] bg-slate-900 border border-slate-800/80">
-                  <img
-                    src="/images/rack-console-session.jpeg"
-                    alt="Ephraim Addae Sam conducting a live console session in front of an IT equipment rack"
-                    className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                {/* Photo Switcher Controls */}
+                <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/90 border border-slate-800 mb-3 text-xs font-mono">
+                  <button
+                    type="button"
+                    onClick={() => setActivePhoto('portrait')}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg font-semibold transition-all ${
+                      activePhoto === 'portrait'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <UserCheck className="h-3.5 w-3.5" />
+                    <span>Official Portrait</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActivePhoto('rack')}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg font-semibold transition-all ${
+                      activePhoto === 'rack'
+                        ? 'bg-blue-600 text-white shadow-sm'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <Server className="h-3.5 w-3.5" />
+                    <span>Field Console</span>
+                  </button>
+                </div>
+
+                {/* Main Photo Container */}
+                <div className="relative overflow-hidden rounded-xl aspect-[4/5] bg-slate-900 border border-slate-800/80">
+                  <AnimatePresence mode="wait">
+                    {activePhoto === 'portrait' ? (
+                      <motion.img
+                        key="portrait"
+                        src={profile.avatar}
+                        alt={`Official portrait of ${profile.name}`}
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        transition={{ duration: 0.25 }}
+                        className="h-full w-full object-cover object-top group-hover:scale-103 transition-transform duration-500"
+                      />
+                    ) : (
+                      <motion.img
+                        key="rack"
+                        src="/images/rack-console-session.jpeg"
+                        alt="Ephraim Addae Sam conducting a live console session in front of an IT equipment rack"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        transition={{ duration: 0.25 }}
+                        className="h-full w-full object-cover object-center group-hover:scale-103 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    )}
+                  </AnimatePresence>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Caption badge */}
                   <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs font-mono text-slate-300">
-                    <span className="bg-slate-900/90 border border-slate-700/80 px-2.5 py-1 rounded-md backdrop-blur-sm text-cyan-300 flex items-center gap-1.5">
-                      <Radio className="h-3 w-3" />
-                      Rack &amp; Console Session
+                    <span className="bg-slate-900/90 border border-cyan-500/30 px-2.5 py-1 rounded-md backdrop-blur-sm text-cyan-300 flex items-center gap-1.5 shadow-md">
+                      {activePhoto === 'portrait' ? (
+                        <>
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          <span>Ephraim Addae Sam</span>
+                        </>
+                      ) : (
+                        <>
+                          <Radio className="h-3 w-3" />
+                          <span>Rack Console Session</span>
+                        </>
+                      )}
                     </span>
-                    <span className="text-slate-400">Accra, Ghana</span>
+                    <span className="text-slate-400 bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm">
+                      Accra, Ghana
+                    </span>
                   </div>
                 </div>
 

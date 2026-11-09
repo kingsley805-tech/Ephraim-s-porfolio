@@ -1,8 +1,48 @@
+export const workedFor = [
+  {
+    name: 'Cowater International',
+    logo: '/images/worked-for/cowater.jpeg',
+    role: 'IT Infrastructure & Support',
+    description: 'International development consulting and field IT operations in Ghana.',
+  },
+  {
+    name: 'Department of Feeder Roads',
+    logo: '/images/worked-for/feeder-roads.jpeg',
+    role: 'Republic of Ghana',
+    description: 'Government agency network maintenance, CCTV, and systems administration.',
+  },
+  {
+    name: 'Shalina Healthcare',
+    logo: '/images/worked-for/shalina.jpeg',
+    role: 'IT Support & Systems',
+    description: 'Pharmaceutical healthcare facilities, hardware maintenance & LAN support.',
+  },
+  {
+    name: 'SIGRA',
+    logo: '/images/worked-for/sigra.jpeg',
+    role: 'Technical Support Services',
+    description: 'Research initiative IT systems, security infrastructure & user support.',
+  },
+  {
+    name: 'Aifa Services Ltd.',
+    logo: '/images/worked-for/aifa.jpeg',
+    role: 'IT Support & Maintenance',
+    description: 'Corporate client infrastructure deployment and hardware servicing.',
+  },
+  {
+    name: 'NOVA Business School Africa',
+    logo: '/images/worked-for/nova.jpeg',
+    role: 'Campus IT & Network Systems',
+    description: 'Higher education systems, student & staff network connectivity.',
+  },
+] as const
+
 export const profile = {
   name: 'Ephraim Addae Sam',
   shortName: 'Ephraim',
   title: 'Networking Engineer & Technical Support Specialist',
   cvTitle: 'IT Support Specialist',
+  avatar: '/images/profile.jpeg',
   location: 'Accra, Ghana',
   phone: '+233 55 761 6152',
   phoneHref: 'tel:+233557616152',

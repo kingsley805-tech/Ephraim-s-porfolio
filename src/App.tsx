@@ -1,6 +1,7 @@
 import { Seo } from './components/Seo'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
+import { WorkedFor } from './components/WorkedFor'
 import { About } from './components/About'
 import { Skills } from './components/Skills'
 import { Experience } from './components/Experience'
@@ -22,6 +23,7 @@ function App() {
 
       <main>
         <Hero />
+        <WorkedFor />
         <About />
         <Skills />
         <Experience />

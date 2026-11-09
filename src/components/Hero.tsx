@@ -34,21 +34,33 @@ export function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Main Hero Copy */}
           <div className="lg:col-span-7 text-left">
-            {/* Status & Eyebrow */}
+            {/* Candidate Profile Avatar & Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex flex-wrap items-center gap-2 rounded-full border border-cyan-500/30 bg-slate-900/80 px-3.5 py-1.5 backdrop-blur-md mb-6 shadow-sm shadow-cyan-500/10"
+              className="flex items-center gap-4 mb-6"
             >
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-mono font-medium text-cyan-300">
-                {profile.status}
-              </span>
-              <span className="text-slate-600 hidden sm:inline">|</span>
-              <span className="text-xs font-mono text-slate-400 hidden sm:inline">
-                {profile.heroEyebrow}
-              </span>
+              <div className="relative h-18 w-18 sm:h-20 sm:w-20 shrink-0 rounded-2xl overflow-hidden border-2 border-cyan-500/40 shadow-xl shadow-cyan-500/20 bg-slate-900 group">
+                <img
+                  src={profile.avatar}
+                  alt={profile.name}
+                  className="h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute bottom-1 right-1 h-3 w-3 rounded-full bg-emerald-400 border-2 border-[#080F1C] animate-pulse" />
+              </div>
+
+              <div>
+                <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-cyan-500/30 bg-slate-900/80 px-3.5 py-1 backdrop-blur-md mb-1.5 shadow-sm shadow-cyan-500/10">
+                  <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-xs font-mono font-medium text-cyan-300">
+                    {profile.status}
+                  </span>
+                </div>
+                <p className="text-xs font-mono text-slate-400">
+                  {profile.heroEyebrow}
+                </p>
+              </div>
             </motion.div>
 
             {/* Candidate Name & Title */}
@@ -241,7 +253,6 @@ export function Hero() {
                 {/* Verified Impact Banner */}
                 <div className="rounded-xl bg-gradient-to-r from-blue-900/30 to-cyan-900/30 border border-cyan-500/20 p-3 flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    
                     <span className="text-[11px] text-slate-200">
                       Preventive maintenance outcome:
                     </span>
@@ -275,4 +286,3 @@ export function Hero() {
     </section>
   )
 }
-
